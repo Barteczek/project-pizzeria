@@ -31,10 +31,11 @@ class DatePicker extends BaseWidget {
   initPlugin(){
     const thisWidget = this;
 
-    thisWidget.minDate = new Date(thisWidget.value);
-    thisWidget.maxDate = utils.dateToStr(utils.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture));
+    thisWidget.minDate = new Date(thisWidget.value);  
+    thisWidget.maxDate = utils.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture);
     
     flatpickr(thisWidget.dom.input, {
+      defaultDate: thisWidget.minDate,
       minDate: thisWidget.minDate,
       maxDate: thisWidget.maxDate,
       disable: [
@@ -46,11 +47,11 @@ class DatePicker extends BaseWidget {
       locale: {
         firstDayOfWeek: 1 // start week on Monday
       },
-      onChange: function(dateStr) {
-
-        thisWidget.value = dateStr;
+      onChange: function(selectedDates, dateStr) {
+        thisWidget.value = dateStr;        
       },
     });
+    
   }
 }
 
