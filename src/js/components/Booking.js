@@ -260,7 +260,7 @@ class Booking {
         alert('Zapisano');
       });
 
-    thisBooking.makeBooked(thisBooking.date, thisBooking.hourPicker.correctValue, thisBooking.hoursAmount.correctValue, thisBooking.selectedTableId)  
+    thisBooking.makeBooked(thisBooking.date, thisBooking.hourPicker.correctValue, thisBooking.hoursAmount.correctValue, thisBooking.selectedTableId);  
     thisBooking.clearSelected();
     thisBooking.updateDOM();
   }
