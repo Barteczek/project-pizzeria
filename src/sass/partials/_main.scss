@@ -1,0 +1,179 @@
+#main {
+
+  > * {
+    // display: none;
+    box-sizing: border-box;
+  }
+
+  > .active {
+    display: block;
+  }
+}
+
+.main-wrapper {
+  margin: ($base-size * 3.5) auto;
+  padding: ($base-size * 1) ($base-size * 4);
+  background: $color-light;
+  border-bottom: 1px solid lighten($color-dark, 70%);
+  border-radius: $radius;
+}
+
+/* Page nav */
+
+.page-nav {
+  margin-top: 50px;
+  height: 300px;
+
+  div {
+    padding: 5px;
+    text-align: center;
+  }
+
+  a {
+    position: relative;
+    display: block;
+    background-size: cover;
+    background-position: center;
+    height: 120px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: $color-light;
+    padding: 10px;
+    overflow: hidden;
+  }
+  
+  .main_order {
+    background-image: url("/images/assets/pizza-1.jpg");
+  }
+
+  .main_booking {
+    background-image: url("/images/assets/pizza-2.jpg");
+  }
+
+  .main_hours {
+    height: 120px;
+    width: 100%;
+    background-color: $color-main;
+    border-radius: 4px;
+    margin: 0 5px;
+    overflow: hidden;
+  }
+  
+  h3, h4 {
+    color: $color-light;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-family: $font-header;
+    margin-top: 30px;
+  }
+
+  h4 {
+    margin-top: -15px;
+  }
+
+  span {
+    display: block;
+    position: relative;
+    top: 50px;
+  }
+
+  a:hover {
+    > h3 {
+      transform: translateY(-10px);
+      transition: $transition;
+    }
+
+    > span {
+      top: -10px;
+      transition: $transition;
+    }
+  } 
+}
+
+/* Carousel */
+
+.carousel {
+
+  position: relative;
+  height: 40vh;
+
+  .carousel-item {
+    position: absolute;
+    height: 100%;
+    margin: 10px 0;
+    top: 0;
+
+  }
+  .main-image-wrapper {
+    overflow: hidden;
+    padding: 10px;
+
+    img {
+      width: 100%;
+      height: 210px;
+      border-radius: $radius;
+      object-fit: cover;
+    }
+  }
+}
+
+/* Gallery */
+
+.gallery-wrapper {
+
+  .gallery-item {
+    position: relative;
+    padding: 0 10px;
+    margin: 10px 0;
+    overflow: hidden;
+    height: 210px;
+  }
+
+  .gallery-item::after {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    content: "";
+    width: 210px;
+    height: 210px;
+    background: rgba($color-dark, 0.2);
+    display: none;
+    border-radius: $radius;
+  }
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 210px;
+    border-radius: $radius;
+  }
+
+  figcaption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: $color-light;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    display: none;
+
+    i:first-of-type {
+      color: $color-danger;
+      padding-right: 10px;
+    }
+  }
+
+  .gallery-item:hover:after, .gallery-item:hover figcaption {
+    transition: $transition;
+    display: block;
+  }
+}
+
+/* Footer */
+
+footer a {
+  color: $color-main;
+}
+  
