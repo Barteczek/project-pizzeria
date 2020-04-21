@@ -5,8 +5,11 @@
 
   &__wrapper {
     position: relative;
-  }
 
+    >a {
+      color: inherit;
+    }
+  }
 }
 
 .logo {

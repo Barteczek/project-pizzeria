@@ -1,15 +1,3 @@
-#main {
-
-  > * {
-    // display: none;
-    box-sizing: border-box;
-  }
-
-  > .active {
-    display: block;
-  }
-}
-
 .main-wrapper {
   margin: ($base-size * 3.5) auto;
   padding: ($base-size * 1) ($base-size * 4);
@@ -21,11 +9,15 @@
 /* Page nav */
 
 .page-nav {
-  margin-top: 50px;
-  height: 300px;
+  margin: 50px 0;
+  height: 240px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
-  div {
-    padding: 5px;
+  .main-box {
+    width: 49%;
+    margin-bottom: 10px;
     text-align: center;
   }
 
@@ -38,7 +30,6 @@
     border-radius: 4px;
     text-decoration: none;
     color: $color-light;
-    padding: 10px;
     overflow: hidden;
   }
   
@@ -55,7 +46,7 @@
     width: 100%;
     background-color: $color-main;
     border-radius: 4px;
-    margin: 0 5px;
+    text-align: center;
     overflow: hidden;
   }
   
@@ -66,82 +57,83 @@
 
   h3 {
     font-family: $font-header;
-    margin-top: 30px;
+    margin-top: 40px;
+    transition: $transition;
   }
 
   h4 {
-    margin-top: -15px;
+    margin-top: -10px;
   }
 
   span {
     display: block;
     position: relative;
     top: 50px;
+    transition: $transition;
   }
 
   a:hover {
     > h3 {
       transform: translateY(-10px);
-      transition: $transition;
     }
 
     > span {
       top: -10px;
-      transition: $transition;
     }
   } 
 }
 
 /* Carousel */
 
-.carousel {
+.carousel-item {
+  height: 210px;
+  margin: 50px 0;
+}
 
-  position: relative;
-  height: 40vh;
+.carousel-img {
+  width: 31%;
+  height: 210px;
+  background: url(/images/assets/pizza-3.jpg) center;
+  background-size: cover;
+  border-radius: $radius;
 
-  .carousel-item {
-    position: absolute;
-    height: 100%;
-    margin: 10px 0;
-    top: 0;
+}
 
-  }
-  .main-image-wrapper {
-    overflow: hidden;
-    padding: 10px;
-
-    img {
-      width: 100%;
-      height: 210px;
-      border-radius: $radius;
-      object-fit: cover;
-    }
-  }
+.carousel-caption {
+  color: $color-dark;
+  text-align: left;
+  margin-left: 150px;
 }
 
 /* Gallery */
 
 .gallery-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+  margin: 30px 0;
 
   .gallery-item {
-    position: relative;
-    padding: 0 10px;
-    margin: 10px 0;
+    width: 31%;
     overflow: hidden;
     height: 210px;
+    margin-bottom: 20px;
+    position: relative;
   }
 
-  .gallery-item::after {
+  .gallery-item::before {
     position: absolute;
     top: 0;
-    left: 10px;
+    left: 0;
     content: "";
-    width: 210px;
-    height: 210px;
-    background: rgba($color-dark, 0.2);
-    display: none;
+    width: 100%;
+    height: 100%;
+    background: rgba($color-dark, 0.6);
     border-radius: $radius;
-  }
+    opacity: 0;
+    transition: $transition;
+  }    
 
   img {
     object-fit: cover;
@@ -154,21 +146,26 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    color: $color-light;
     transform: translate(-50%, -50%);
-    font-size: 16px;
-    display: none;
+    opacity: 0;
 
-    i:first-of-type {
-      color: $color-danger;
-      padding-right: 10px;
+    a {
+      text-decoration: none;
+      color: $color-light;
+      font-size: 20px;
+      padding: 5px;
+      transition: $transition;
     }
   }
 
-  .gallery-item:hover:after, .gallery-item:hover figcaption {
-    transition: $transition;
+  .gallery-item:hover:before, .gallery-item:hover figcaption {
+    opacity: 1;
     display: block;
   }
+  
+  .gallery-item figcaption a:hover {
+    color: $color-danger;
+  } 
 }
 
 /* Footer */
