@@ -11,6 +11,8 @@ class Booking {
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
+
+    console.log('thisBooking', thisBooking);
     
   }
 
@@ -92,7 +94,7 @@ class Booking {
 
   makeBooked(date, hour, duration, table){
     const thisBooking = this;
-
+    
     if(typeof thisBooking.booked[date] === 'undefined'){
       thisBooking.booked[date] = {};
     }
@@ -107,6 +109,35 @@ class Booking {
 
       thisBooking.booked[date][hourBlock].push(table);
     }
+  }
+
+  checkBooked(){
+    const thisBooking = this;
+
+    const startHour = parseInt(thisBooking.hourPicker.dom.input.min);
+    const endHour = parseInt(thisBooking.hourPicker.dom.input.max);
+
+    const bookedVolume = {
+      'green': [],
+      'yellow': [],
+      'red': [],
+    };
+    
+    for(let hourBlock = startHour; hourBlock <= endHour; hourBlock += 0.5) {
+      
+      if(typeof thisBooking.booked[thisBooking.date][hourBlock] === 'undefined' || thisBooking.booked[thisBooking.date][hourBlock].length === 1){
+        bookedVolume['green'].push(hourBlock);
+        
+      } else if(thisBooking.booked[thisBooking.date][hourBlock].length === 2){
+        bookedVolume['yellow'].push(hourBlock);
+      } else {
+        bookedVolume['red'].push(hourBlock);
+      }
+    }
+    console.log(bookedVolume);
+    const sliderBackground = document.querySelector('.rangeSlider');
+    console.log(sliderBackground);
+    
   }
 
   checkAllAvailable(){
@@ -149,6 +180,7 @@ class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
+    thisBooking.checkBooked();
   }
 
   render(wrapper){

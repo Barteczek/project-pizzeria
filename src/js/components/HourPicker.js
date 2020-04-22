@@ -16,7 +16,7 @@ class HourPicker extends BaseWidget {
     thisWidget.dom.output = wrapper.querySelector(select.widgets.hourPicker.output);
 
     thisWidget.initPlugin();
-    thisWidget.setValue(thisWidget.dom.input.value); 
+    thisWidget.setValue(thisWidget.dom.input.value);     
   }
 
   parseValue(value){
