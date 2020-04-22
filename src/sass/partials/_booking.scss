@@ -59,7 +59,6 @@
 
 .rangeSlider {
   top: $base-size;
-  background: lighten($color-dark, 70%);
   box-shadow: none;
   height: $base-size;
 
@@ -78,15 +77,30 @@
       height: ($base-size * 2);
       top: -6px;
       background: $color-dark;
+      z-index: 3;
     }
-
   }
 
-  &__fill {
-    background: $color-success;
-    transition-timing-function: cubic-bezier(0, 1, 0, 1);
-    transition: width 100ms;
-    box-shadow: none;
+}
+
+.available-hours {
+  position: relative;
+  width: 100%;
+  height: $base-size;
+  background-color: #27ae60;
+  border-radius: 6px;
+  overflow: hidden;
+  
+  &__yellow {
+    position: absolute;
+    height: $base-size;
+    background-color: $color-warning;
+  }
+
+  &__red {
+    position: absolute;
+    height: $base-size;
+    background-color: $color-danger;
   }
 }
 

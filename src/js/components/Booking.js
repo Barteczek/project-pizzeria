@@ -10,10 +10,7 @@ class Booking {
     
     thisBooking.render(element);
     thisBooking.initWidgets();
-    thisBooking.getData();
-
-    console.log('thisBooking', thisBooking);
-    
+    thisBooking.getData();   
   }
 
   getData(){
@@ -111,32 +108,29 @@ class Booking {
     }
   }
 
-  checkBooked(){
+  checkAvailableHours(){
     const thisBooking = this;
-
-    const startHour = parseInt(thisBooking.hourPicker.dom.input.min);
+    
     const endHour = parseInt(thisBooking.hourPicker.dom.input.max);
 
     const bookedVolume = {
-      'green': [],
       'yellow': [],
       'red': [],
     };
     
-    for(let hourBlock = startHour; hourBlock <= endHour; hourBlock += 0.5) {
+    for(let hourBlock = 0; hourBlock <= endHour; hourBlock += 0.5) {
       
       if(typeof thisBooking.booked[thisBooking.date][hourBlock] === 'undefined' || thisBooking.booked[thisBooking.date][hourBlock].length === 1){
-        bookedVolume['green'].push(hourBlock);
-        
+        continue;        
       } else if(thisBooking.booked[thisBooking.date][hourBlock].length === 2){
         bookedVolume['yellow'].push(hourBlock);
       } else {
         bookedVolume['red'].push(hourBlock);
       }
     }
-    console.log(bookedVolume);
-    const sliderBackground = document.querySelector('.rangeSlider');
-    console.log(sliderBackground);
+
+    thisBooking.hourPicker.renderSliderColor(bookedVolume);
+    
     
   }
 
@@ -180,7 +174,7 @@ class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
-    thisBooking.checkBooked();
+    thisBooking.checkAvailableHours();
   }
 
   render(wrapper){
@@ -251,7 +245,6 @@ class Booking {
     if(thisBooking.checkAllAvailable() || !thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)){ 
       table.classList.toggle(classNames.booking.selected);
       thisBooking.selectedTableId = tableId;
-      console.log('thisBooking.selectedTableId', thisBooking);
     } 
   }
 
@@ -270,7 +263,6 @@ class Booking {
     };
 
     for(let starter of thisBooking.dom.starters){
-      console.log(starter.checked);
       if(starter.checked){
         payload.starters.push(starter.value);
       }
