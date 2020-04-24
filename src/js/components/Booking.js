@@ -108,10 +108,10 @@ class Booking {
     }
   }
 
-  checkAvailableHours(){
+  checkBookingVolume(){
     const thisBooking = this;
     
-    const endHour = parseInt(thisBooking.hourPicker.dom.input.max);
+    const endHour = parseFloat(thisBooking.hourPicker.dom.input.max);
 
     const bookedVolume = {
       'yellow': [],
@@ -119,6 +119,7 @@ class Booking {
     };
     
     for(let hourBlock = 0; hourBlock <= endHour; hourBlock += 0.5) {
+      console.log(hourBlock, endHour);
       
       if(typeof thisBooking.booked[thisBooking.date][hourBlock] === 'undefined' || thisBooking.booked[thisBooking.date][hourBlock].length === 1){
         continue;        
@@ -130,10 +131,24 @@ class Booking {
     }
 
     thisBooking.hourPicker.renderSliderColor(bookedVolume);
-    
-    
+    console.log(thisBooking);
   }
 
+  checkAvailableHours(){
+    const thisBooking = this;
+
+    if(!(typeof thisBooking.selectedTableId === 'undefined')){
+      for(let hour in thisBooking.booked[thisBooking.date]) {
+        if(hour > thisBooking.hour && thisBooking.booked[thisBooking.date][hour].includes(thisBooking.selectedTableId)){          
+          thisBooking.hoursAmount.maxValue = hour - thisBooking.hour;
+          break;
+        } else {          
+          thisBooking.hoursAmount.maxValue = Math.round(parseFloat(thisBooking.hourPicker.dom.input.max)) - thisBooking.hour;
+        }
+      }
+    }
+  }
+  
   checkAllAvailable(){
     const thisBooking = this;
 
@@ -174,6 +189,7 @@ class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
+    thisBooking.checkBookingVolume();
     thisBooking.checkAvailableHours();
   }
 
@@ -218,7 +234,11 @@ class Booking {
     
     thisBooking.dom.wrapper.addEventListener('submit', function(event){
       event.preventDefault();
-      thisBooking.sendBooking();
+      if(thisBooking.hour > settings.hours.close - 1){
+        alert('Please pick a time in range 12:00 - 23:00');
+      } else {
+        thisBooking.sendBooking();
+      }
     });
   }
 
@@ -246,6 +266,9 @@ class Booking {
       table.classList.toggle(classNames.booking.selected);
       thisBooking.selectedTableId = tableId;
     } 
+    thisBooking.checkAvailableHours();
+    console.log(thisBooking);
+    
   }
 
 

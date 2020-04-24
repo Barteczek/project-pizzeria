@@ -35,29 +35,27 @@ class HourPicker extends BaseWidget {
 
   renderSliderColor({red = [], yellow = []}){
     const thisWidget = this;
+    // console.log(thisBooking.booked);
+    
 
     const renderedSlider = thisWidget.availableHours.querySelector('.available-hours');
   
     renderedSlider.innerHTML = '';
     
-    const range = parseFloat(thisWidget.dom.input.max) - parseFloat(thisWidget.dom.input.min);
+    const range = Math.round(parseFloat(thisWidget.dom.input.max) - parseFloat(thisWidget.dom.input.min));
     const step = parseFloat(thisWidget.dom.input.step);
-    const width = ((100) / (range / step + 1));   
+    const width = (100 / range * step);   
+    console.log(range, step, width);
+    
 
     for(let element of yellow) {
-      if(element === 0){
-        renderedSlider.innerHTML += '<div class=available-hours__yellow style="width: 100%; left: '+ (100 - width) + '%"></div>';
-      } else {
-        renderedSlider.innerHTML += '<div class=available-hours__yellow style="width: '+ width +'%; left: ' + (element - parseFloat(thisWidget.dom.input.min))/step * width +'%"></div>';
-      }
+      renderedSlider.innerHTML += '<div class=available-hours__yellow style="width: '+ width +'%; left: ' + (element - parseFloat(thisWidget.dom.input.min))/step * width +'%"></div>';
+      
     }
 
     for(let element of red) {
-      if(element === 0){
-        renderedSlider.innerHTML += '<div class=available-hours__red style="width: 100%; left: '+ (100 - width) + '%"></div>';
-      } else {
-        renderedSlider.innerHTML += '<div class=available-hours__red style="width: '+ width +'%; left: ' + (element - parseFloat(thisWidget.dom.input.min))/step * width +'%"></div>';
-      }
+      renderedSlider.innerHTML += '<div class=available-hours__red style="width: '+ width +'%; left: ' + (element - parseFloat(thisWidget.dom.input.min))/step * width +'%"></div>';
+
     }
   }  
 
