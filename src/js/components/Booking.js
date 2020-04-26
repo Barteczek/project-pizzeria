@@ -119,7 +119,6 @@ class Booking {
     };
     
     for(let hourBlock = 0; hourBlock <= endHour; hourBlock += 0.5) {
-      console.log(hourBlock, endHour);
       
       if(typeof thisBooking.booked[thisBooking.date][hourBlock] === 'undefined' || thisBooking.booked[thisBooking.date][hourBlock].length === 1){
         continue;        
@@ -131,7 +130,6 @@ class Booking {
     }
 
     thisBooking.hourPicker.renderSliderColor(bookedVolume);
-    console.log(thisBooking);
   }
 
   checkAvailableHours(){
