@@ -35,8 +35,6 @@ class HourPicker extends BaseWidget {
 
   renderSliderColor({red = [], yellow = []}){
     const thisWidget = this;
-    // console.log(thisBooking.booked);
-    
 
     const renderedSlider = thisWidget.availableHours.querySelector('.available-hours');
   
@@ -45,9 +43,7 @@ class HourPicker extends BaseWidget {
     const range = Math.round(parseFloat(thisWidget.dom.input.max) - parseFloat(thisWidget.dom.input.min));
     const step = parseFloat(thisWidget.dom.input.step);
     const width = (100 / range * step);   
-    console.log(range, step, width);
-    
-
+  
     for(let element of yellow) {
       renderedSlider.innerHTML += '<div class=available-hours__yellow style="width: '+ width +'%; left: ' + (element - parseFloat(thisWidget.dom.input.min))/step * width +'%"></div>';
       

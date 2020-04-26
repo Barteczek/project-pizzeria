@@ -22,13 +22,19 @@ class AmountWidget extends BaseWidget {
   
   isValid(value){
     const thisWidget = this;
-    if(thisWidget.maxValue === 'undefined'){
-      thisWidget.maxValue = settings.amountWidget.defaultMax;
-    }
+    
 
-    return !isNaN(value) 
+    if(thisWidget.maxValue) {
+      
+      return !isNaN(value) 
       && value >= settings.amountWidget.defaultMin 
       && value <= thisWidget.maxValue;
+    } else {
+      
+      return !isNaN(value) 
+      && value >= settings.amountWidget.defaultMin 
+      && value <= settings.amountWidget.defaultMax;
+    }
   }
 
   parseValue(value){
@@ -50,7 +56,7 @@ class AmountWidget extends BaseWidget {
   
     thisWidget.dom.linkDecrease.addEventListener('click', function(event){
       event.preventDefault();
-
+      
       if(thisWidget.dom.input.step === ''){
         thisWidget.dom.input.step = '1';
       }
@@ -60,7 +66,8 @@ class AmountWidget extends BaseWidget {
 
     thisWidget.dom.linkIncrease.addEventListener('click', function(event){
       event.preventDefault();
-
+      
+      
       if(thisWidget.dom.input.step === ''){
         thisWidget.dom.input.step = '1';
       }
